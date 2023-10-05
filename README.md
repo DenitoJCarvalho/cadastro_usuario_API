@@ -11,6 +11,9 @@ Projeto realizado para teste na empresa **Fill Tecnologia**.
 Para testar o projeto
 
 - execute npm install para instalar as dependências;
+> npm install
+
+<br>
 
 Dependências | Versão 
 -----------  | ------
@@ -27,4 +30,17 @@ Dependências de Desenvolvimento | Versão
 jest                            | ^19.7.0
 ts-jest                         | ^29.1.1
 ts-node-dev                     | ^2.0.0
+mysql2                          | ^3.6.1
 
+SGBD  | Tipo | Versão
+----  | ---- | --------
+MySQL | SQL  | 8.0
+
+<br>
+
+A ORM utilizada para manipular as informações
+
+ORM               | Versão
+-----             | ---------
+TypeORM           | ^0.3.17
+reflect-metadata  | ^0.1.13 
