@@ -3,6 +3,7 @@ import cors from 'cors';
 
 import { normalizePort } from './server/server';
 import { database } from './database/typeorm';
+import { route } from './routes/routes';
 import { dotenv } from './environment/env';
 
 import 'reflect-metadata';
@@ -22,6 +23,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use('/', route);
 
 app.listen(port, () => {
   console.log(`Server is running in dev localhost:${port}`);
