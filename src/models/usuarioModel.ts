@@ -12,17 +12,35 @@ export const Usuario = database.define('Usuario', {
   nome: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      len: {
+        args: [3, 40],
+        msg: `Campo nome deve ter entre 3 a 40 caracteres.`
+      }
+    }
   },
 
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
+    validate: {
+      len: {
+        args: [20, 40],
+        msg: `Campo email é obrigatório.`
+      }
+    }
   },
 
   senha: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      len: {
+        args: [4, 20],
+        msg: `Campo senha deve ter entre 4 a 20 caracteres.`
+      }
+    }
   },
 
   status: {
