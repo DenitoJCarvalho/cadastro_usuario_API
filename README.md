@@ -39,5 +39,5 @@ A ORM utilizada para manipular as informações
 
 ORM               | Versão
 -----             | ---------
-TypeORM           | ^0.3.17
-reflect-metadata  | ^0.1.13 
+Sequelize           | ^6.33.0
+ 

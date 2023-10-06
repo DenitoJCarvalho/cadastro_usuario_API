@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 import { normalizePort } from './server/server';
-import { database } from './database/typeorm';
+import { database } from './database/sequelize';
 import { route } from './routes/routes';
 import { dotenv } from './environment/env';
 
@@ -28,13 +28,13 @@ app.use('/', route);
 app.listen(port, () => {
   console.log(`Server is running in dev localhost:${port}`);
 
-  database.initialize()
-    .then(() => {
-      console.log(`Banco de dados inicializado.`);
-    })
-    .catch((e) => {
-      if (e instanceof Error) {
-        console.error(`Erro ao inicializar banco de dados ${e.message}`);
-      }
-    });
+  try {
+    database.authenticate();
+    console.log(`Banco de dados conectado.`);
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(`Erro ao conectar no banco de dados. ${e.message}`)
+    }
+  }
+
 });

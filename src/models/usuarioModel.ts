@@ -1,32 +1,35 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { DataTypes } from 'sequelize';
+import { database } from '../database/sequelize';
 
-import { Questoes } from './questoesModel';
+export const Usuario = database.define('Usuario', {
+  usuario_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
 
-import { IUser } from '../interfaces/IUser';
+  nome: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 
-@Entity()
-export class Usuario implements IUser {
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
 
-  @PrimaryGeneratedColumn()
-  usuario_id!: number;
+  senha: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
 
-  @Column({ length: 40, nullable: false })
-  nome!: string;
+  status: {
+    type: DataTypes.TINYINT,
+    allowNull: false,
+    defaultValue: 0
+  }
+});
 
-  @Column({ length: 40, nullable: false })
-  email!: string;
-
-  @Column({ length: 20, nullable: false })
-  senha!: string
-
-  @Column({ nullable: false })
-  criadoEm!: Date;
-
-  @Column({ default: 0 })
-  status!: number;
-
-  @OneToOne((type) => Questoes, (questoes) => questoes.questao_id)
-  @JoinColumn()
-  questoes!: Questoes
-
-}
+//Usuario.sync({ force: true });
