@@ -1,21 +1,30 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { DataTypes } from 'sequelize';
+import { database } from '../database/sequelize';
 
-import { Questoes } from './questoesModel';
+const Alternativas = database.define('Alternativas', {
+  alternativa_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
 
-@Entity()
-export class Alternativas {
+  descricao: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: { args: [3, 200], msg: `O campo descricao deve ter entre 3 e 200 caracteres.` }
+    }
+  },
 
-  @PrimaryGeneratedColumn()
-  alternativa_id!: number;
+  flag: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
 
-  @Column({ length: 200, nullable: false })
-  descircao!: string;
+});
 
-  @Column({ nullable: false, default: false })
-  flag!: boolean;
 
-  @OneToOne((type) => Questoes, (questoes) => questoes.questao_id)
-  @JoinColumn()
-  questoes!: Questoes;
+Alternativas.sync({ force: true });
 
-}
+
