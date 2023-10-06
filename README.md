@@ -41,3 +41,12 @@ ORM               | Versão
 -----             | ---------
 Sequelize           | ^6.33.0
  
+
+ #### Modulo de usuários 
+
+ Consta com os seguintes métodos:
+ - cadastarUsuario()
+ - listarUsuarios()
+ - mostarUsuario()
+ - atualizarUsuario()
+ - deletarUsuario()
