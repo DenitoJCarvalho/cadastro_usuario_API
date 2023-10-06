@@ -49,3 +49,27 @@ export const listarUsuarios = async (request: Request, response: Response) => {
     }
   }
 }
+
+export const mostrarUsuario = async (request: Request, response: Response) => {
+
+  try {
+    const user = await Usuario
+      .findOne({
+        where: {
+          usuario_id: request.params.id
+        }
+      })
+      .then(res => {
+        response.status(200).json({
+          res,
+          message: `Dados do usuário apresentado com sucesso.`
+        });
+      });
+  } catch (e) {
+    if (e instanceof Error) {
+      response.status(404).json({
+        message: `Não foi possível apresentar dados do usuário ${request.body.id}. ${e.message}`
+      });
+    }
+  }
+}
