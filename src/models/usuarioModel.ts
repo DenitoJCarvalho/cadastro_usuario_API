@@ -2,14 +2,16 @@ import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'ty
 
 import { Questoes } from './questoesModel';
 
+import { IUser } from '../interfaces/IUser';
+
 @Entity()
-export class Usuario {
+export class Usuario implements IUser {
 
   @PrimaryGeneratedColumn()
   usuario_id!: number;
 
   @Column({ length: 40, nullable: false })
-  name!: string;
+  nome!: string;
 
   @Column({ length: 40, nullable: false })
   email!: string;

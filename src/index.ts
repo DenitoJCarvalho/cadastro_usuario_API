@@ -15,7 +15,7 @@ app.use(cors({
   origin: '*',
   methods: 'GET, POST, PUT, DELETE',
   allowedHeaders: [
-    'Content-Type', 'Authorizathion'
+    'Content-Type', 'Authorizathion', dotenv.URL_LOCAL
   ],
   preflightContinue: false,
   optionsSuccessStatus: 204,
@@ -31,7 +31,10 @@ app.listen(port, () => {
   database.initialize()
     .then(() => {
       console.log(`Banco de dados inicializado.`);
-    }).catch((e) => {
-      console.error(`Erro ao inicializar banco de dados ${e}`);
+    })
+    .catch((e) => {
+      if (e instanceof Error) {
+        console.error(`Erro ao inicializar banco de dados ${e.message}`);
+      }
     });
 });

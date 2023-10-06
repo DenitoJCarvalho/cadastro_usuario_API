@@ -1,3 +1,8 @@
 export interface IUser {
-  cadastrar(): string;
+  usuario_id?: number,
+  nome: string,
+  email: string,
+  senha: string,
+  criadoEm: Date,
+  status?: number
 }

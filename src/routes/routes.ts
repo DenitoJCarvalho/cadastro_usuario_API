@@ -1,9 +1,7 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 
-import { Usuario } from '../controllers/usuarioController';
+import { cadastrarUsuario } from '../controllers/usuarioController';
 
 export const route = Router();
 
-const user = new Usuario();
-
-route.post('/cadastarUsuario', user.cadastrar);
+route.post('/cadastrarUsuario', cadastrarUsuario);
