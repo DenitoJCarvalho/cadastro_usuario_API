@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 
-import { database } from '../database/sequelize';
 
 import { Usuario } from '../models/usuarioModel'
 
@@ -95,7 +94,7 @@ export const atualizarUsuario = async (request: Request, response: Response) => 
     user!.save().then(res => {
       response.status(200).json({
         res,
-        message: `Dados do usuário ${request.body.id} atualizado com sucesso.`
+        message: `Dados do usuário ${request.params.id} atualizado com sucesso.`
       });
     })
 
@@ -103,6 +102,33 @@ export const atualizarUsuario = async (request: Request, response: Response) => 
     if (e instanceof Error) {
       response.status(404).json({
         message: `Não foi possível apresentar dados do usuário ${request.body.id}. ${e.message}`
+      });
+    }
+  }
+}
+
+export const deletarUsuario = async (request: Request, response: Response) => {
+
+  try {
+    await Usuario.destroy({
+      where: { usuario_id: request.params.id }
+    })
+      .then(res => {
+        response.status(200).json({
+          res,
+          message: `Dados do usuário ${request.params.id} excluídos com sucesso.`
+        })
+      })
+      .catch(e => {
+        if (e instanceof Error) {
+          response.status(400).json({ message: `Erro ao excluir dados do usuário. ${e.message}` })
+        }
+      });
+
+  } catch (e) {
+    if (e instanceof Error) {
+      response.status(404).json({
+        message: `Não foi possível excluir o usuário ${request.params.id}. ${e.message}`
       });
     }
   }
