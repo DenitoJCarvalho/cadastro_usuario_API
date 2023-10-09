@@ -1,7 +1,10 @@
 import { DataTypes } from 'sequelize';
+
 import { database } from '../database/sequelize';
 
-const Alternativas = database.define('Alternativas', {
+import { Questoes } from '../models/questoesModel';
+
+export const Alternativas = database.define('Alternativas', {
   alternativa_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -24,7 +27,6 @@ const Alternativas = database.define('Alternativas', {
 
 });
 
-
-Alternativas.sync({ force: true });
+//Alternativas.sync({ force: true })
 
 
