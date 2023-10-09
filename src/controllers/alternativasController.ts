@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { Op } from 'sequelize';
 
 import { Alternativas } from '../models/alternativasModel';
 
@@ -59,7 +58,6 @@ export class Alternativa implements IAlternativa {
     }
   }
 
-
   async listarUmaAlternativa(request: Request, response: Response): Promise<any> {
 
     try {
@@ -79,6 +77,50 @@ export class Alternativa implements IAlternativa {
       }
     }
 
+  }
+
+  async atualizar(request: Request, response: Response): Promise<any> {
+
+    try {
+
+      const alternativa = await Alternativas.findOne({
+        where: { alternativa_id: request.params.id }
+      });
+
+      if (alternativa === null) {
+        response.status(404).json({
+          message: `Alternativa não encontrada.`
+        });
+      }
+
+      alternativa!.update({
+        alternativa_id: request.body.alternativa,
+        descricao: request.body.descricao,
+        flag: request.body.flag
+      });
+
+      alternativa!.save()
+        .then(res => {
+          response.status(200).json({
+            res,
+            message: `Alternativa atualizada com sucesso.`
+          });
+        })
+        .catch(e => {
+          if (e instanceof Error) {
+            response.status(400).json({
+              message: e.message
+            })
+          }
+        });
+
+    } catch (e) {
+      if (e instanceof Error) {
+        response.status(500).json({
+          message: e.message
+        });
+      }
+    }
   }
 
 }
