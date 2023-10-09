@@ -123,4 +123,34 @@ export class Alternativa implements IAlternativa {
     }
   }
 
+  async deletar(request: Request, response: Response): Promise<any> {
+    try {
+
+      const alternativa = await Alternativas
+        .destroy({
+          where: { alternativa_id: request.params.id }
+        })
+        .then(res => {
+          response.status(200).json({
+            res,
+            message: `Alternativa excluída com sucesso.`
+          })
+        })
+        .catch(e => {
+          if (e instanceof Error) {
+            response.status(400).json({
+              message: `Erro ao excluir alternativa. ${e.message}`
+            })
+          }
+        });
+
+    } catch (e) {
+      if (e instanceof Error) {
+        response.status(500).json({
+          message: e.message
+        });
+      }
+    }
+  }
+
 }

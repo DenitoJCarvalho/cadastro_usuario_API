@@ -20,3 +20,4 @@ route.post('/cadastrarAlternativa', alternativa.cadastrar);
 route.get('/selecionarAlternativas', alternativa.listar);
 route.get('/alternativa/:id', alternativa.listarUmaAlternativa);
 route.put('/alternativa/:id', alternativa.atualizar);
+route.delete('/deletar/:id', alternativa.deletar);

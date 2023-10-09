@@ -5,4 +5,5 @@ export interface IAlternativa {
   listar(request: Request, response: Response): Promise<any>;
   listarUmaAlternativa(request: Request, response: Response): Promise<any>;
   atualizar(request: Request, response: Response): Promise<any>;
+  deletar(request: Request, response: Response): Promise<any>;
 }
