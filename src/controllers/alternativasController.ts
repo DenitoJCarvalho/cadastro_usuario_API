@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Op } from 'sequelize';
 
 import { Alternativas } from '../models/alternativasModel';
 
@@ -57,4 +58,27 @@ export class Alternativa implements IAlternativa {
       }
     }
   }
+
+
+  async listarUmaAlternativa(request: Request, response: Response): Promise<any> {
+
+    try {
+
+      const alternativa = await Alternativas
+        .findOne({
+          where: { alternativa_id: request.params.id },
+          attributes: ['alternativa_id', 'descricao', 'flag']
+        });
+
+      if (alternativa === null) response.status(404).json({ message: `Alternativa não encontrada.` });
+      else response.status(200).json({ alternativa, mesage: `Alternativa encontrada com sucesso.` });
+
+    } catch (e) {
+      if (e instanceof Error) {
+        response.status(500).json({ message: `Não foi possível encontrar a alternativa. ${e.message}` });
+      }
+    }
+
+  }
+
 }

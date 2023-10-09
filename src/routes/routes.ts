@@ -18,3 +18,4 @@ route.delete('/deletarUsuario/:id', deletarUsuario);
 
 route.post('/cadastrarAlternativa', alternativa.cadastrar);
 route.get('/selecionarAlternativas', alternativa.listar);
+route.get('/alternativa/:id', alternativa.listarUmaAlternativa);
