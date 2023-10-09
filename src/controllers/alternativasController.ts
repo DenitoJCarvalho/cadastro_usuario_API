@@ -33,4 +33,28 @@ export class Alternativa implements IAlternativa {
 
   }
 
+  async listar(request: Request, response: Response): Promise<any> {
+
+    try {
+      const alternativa = await Alternativas
+        .findAll({
+          attributes: ['alternativa_id', 'descricao', 'flag']
+        })
+        .then(res => {
+          response.status(200).json({
+            res,
+            msg: `Alternativas listadas com sucesso.`
+          })
+        })
+        .catch(e => {
+          if (e instanceof Error) {
+            response.status(404).json({ msg: `Alternativas não encontradas. ${e.message}` });
+          }
+        });
+    } catch (e) {
+      if (e instanceof Error) {
+        response.status(500).json({ msg: `Não foi possível listar alternativas.` });
+      }
+    }
+  }
 }

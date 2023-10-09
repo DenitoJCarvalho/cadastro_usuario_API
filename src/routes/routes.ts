@@ -17,3 +17,4 @@ route.put('/atualizarUsuario/:id', atualizarUsuario);
 route.delete('/deletarUsuario/:id', deletarUsuario);
 
 route.post('/cadastrarAlternativa', alternativa.cadastrar);
+route.get('/selecionarAlternativas', alternativa.listar);
